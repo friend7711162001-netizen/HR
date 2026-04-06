@@ -503,3 +503,84 @@ body {
   background-color: var(--text-main);
   transform: translateY(-1px);
 }
+
+/* =========================================
+   時間管理工具 (番茄鐘與累計計時器)
+   ========================================= */
+.time-tools {
+  border: 2px dashed #C1D6CA;
+  border-radius: 14px;
+  background-color: #F6FAF7;
+  padding: 10px 6px; /* 縮小左右內距 */
+  margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 8px 4px; /* 縮小網格間距 */
+  align-items: center;
+  box-shadow: inset 0 2px 6px rgba(136,166,148,0.08);
+}
+
+.tool-label {
+  font-size: 0.7rem; /* 縮小一點字體 */
+  font-weight: 700;
+  color: #6A8072;
+  white-space: nowrap;
+  letter-spacing: -0.5px; /* 讓文字緊湊些 */
+}
+
+.tool-display {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.75rem; /* 字體再更小 */
+  font-weight: 800;
+  color: #556B5D;
+  background-color: #DDEAE2;
+  padding: 3px 6px; /* 縮小數字膠囊 */
+  border-radius: 16px;
+  text-align: center;
+  min-width: 55px; /* 足夠放下 00:00:00 即可 */
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.04);
+}
+
+#pomo-display {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+#pomo-display:hover {
+  background-color: #CEE0D5;
+  border-color: #A9C4B3;
+  transform: translateY(-1px);
+}
+
+.tool-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 3px; /* 按鈕靠更近 */
+  width: 100%;
+}
+
+.tool-btn {
+  background-color: #FFFFFF;
+  border: 1px solid #D1E0D7;
+  color: #88A694;
+  font-size: 0.65rem; /* Icon 縮小 */
+  width: 22px; /* 圓形變小 */
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.tool-btn:hover {
+  background-color: #88A694;
+  color: #FFFFFF;
+  border-color: #88A694;
+  transform: scale(1.15) rotate(8deg);
+  box-shadow: 0 4px 8px rgba(136, 166, 148, 0.3);
+}

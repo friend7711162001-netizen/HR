@@ -121,6 +121,24 @@
 
             <div class="sidebar-footer">
                 <button id="logout-btn" class="logout-btn">登出系統</button>
+                
+                <!-- 時間管理工具 -->
+                <div class="time-tools" id="time-tools">
+                    <div class="tool-label">🍅 番茄鐘</div>
+                    <div class="tool-display" id="pomo-display" title="點擊切換 工作/休息">25:00</div>
+                    <div class="tool-controls">
+                        <button class="tool-btn" id="pomo-play" title="開始/暫停">▶</button>
+                        <button class="tool-btn" id="pomo-reset" title="重置番茄鐘">🔄</button>
+                    </div>
+
+                    <div class="tool-label">⏱️ 計時器</div>
+                    <div class="tool-display" id="stopwatch-display">00:00:00</div>
+                    <div class="tool-controls">
+                        <button class="tool-btn" style="visibility: hidden;">▶</button>
+                        <button class="tool-btn" id="stopwatch-reset" title="重置累積計時器">🔄</button>
+                    </div>
+                </div>
+
                 <p style="font-size: 0.7rem; color: #88A694; margin-top: 4px;">版本 v1.0</p>
                 <p style="font-size: 0.7rem; color: #88A694;">更新: 2026/04/07</p>
             </div>

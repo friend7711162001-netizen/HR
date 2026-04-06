@@ -457,4 +457,116 @@ document.addEventListener("DOMContentLoaded", () => {
         folderEl.appendChild(sheetGroup);
         folderTree.appendChild(folderEl);
     });
+
+    // ======== 番茄鐘與連動計時器 ========
+    const pomoDisplay = document.getElementById("pomo-display");
+    const pomoPlay = document.getElementById("pomo-play");
+    const pomoResetBtn = document.getElementById("pomo-reset");
+    const stopwatchDisplay = document.getElementById("stopwatch-display");
+    const stopwatchResetBtn = document.getElementById("stopwatch-reset");
+
+    let pomoTimeLeft = 25 * 60; // 預設 25 分鐘
+    let pomoIsRunning = false;
+    let pomoMode = "work"; // "work" 或是 "break"
+    let pomoInterval = null;
+
+    let totalWorkSeconds = 0; // 累積計時器 (連動番茄鐘)
+
+    function formatTime(seconds) {
+        const m = Math.floor(seconds / 60).toString().padStart(2, "0");
+        const s = (seconds % 60).toString().padStart(2, "0");
+        return `${m}:${s}`;
+    }
+
+    function formatStopwatch(seconds) {
+        const h = Math.floor(seconds / 3600).toString().padStart(2, "0");
+        const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, "0");
+        const s = (seconds % 60).toString().padStart(2, "0");
+        return `${h}:${m}:${s}`;
+    }
+
+    function updateTimerDisplays() {
+        if (pomoDisplay) pomoDisplay.innerText = formatTime(pomoTimeLeft);
+        if (stopwatchDisplay) stopwatchDisplay.innerText = formatStopwatch(totalWorkSeconds);
+    }
+
+    // 番茄鐘：開始/暫停
+    if (pomoPlay) {
+        pomoPlay.addEventListener("click", () => {
+            pomoIsRunning = !pomoIsRunning;
+            if (pomoIsRunning) {
+                pomoPlay.innerText = "⏸";
+                pomoInterval = setInterval(() => {
+                    pomoTimeLeft--;
+                    totalWorkSeconds++; // 計時器跟著番茄鐘走
+
+                    if (pomoTimeLeft <= 0) {
+                        clearInterval(pomoInterval);
+                        pomoIsRunning = false;
+                        pomoPlay.innerText = "▶";
+                        
+                        if (pomoMode === "work") {
+                            setTimeout(() => {
+                                alert("🍅 番茄鐘 25 分鐘完成！稍微休息一下吧！");
+                                pomoMode = "break";
+                                pomoTimeLeft = 5 * 60;
+                                updateTimerDisplays();
+                            }, 50);
+                        } else {
+                            setTimeout(() => {
+                                alert("☕ 休息結束！準備開始新的工作！");
+                                pomoMode = "work";
+                                pomoTimeLeft = 25 * 60;
+                                updateTimerDisplays();
+                            }, 50);
+                        }
+                    }
+                    updateTimerDisplays();
+                }, 1000);
+            } else {
+                pomoPlay.innerText = "▶";
+                clearInterval(pomoInterval);
+            }
+        });
+    }
+
+    // 番茄鐘：重置
+    if (pomoResetBtn) {
+        pomoResetBtn.addEventListener("click", () => {
+            clearInterval(pomoInterval);
+            pomoIsRunning = false;
+            pomoPlay.innerText = "▶";
+            pomoMode = "work";
+            pomoTimeLeft = 25 * 60;
+            updateTimerDisplays();
+        });
+    }
+
+    // 番茄鐘：點擊時間區域手動切換 工作/休息
+    if (pomoDisplay) {
+        pomoDisplay.addEventListener("click", () => {
+            if (!pomoIsRunning) {
+                if (pomoMode === "work") {
+                    pomoMode = "break";
+                    pomoTimeLeft = 5 * 60;
+                } else {
+                    pomoMode = "work";
+                    pomoTimeLeft = 25 * 60;
+                }
+                updateTimerDisplays();
+            }
+        });
+    }
+
+    // 計時器：重置累積時間
+    if (stopwatchResetBtn) {
+        stopwatchResetBtn.addEventListener("click", () => {
+            if (confirm("確定要將累積作帳時間歸零嗎？")) {
+                totalWorkSeconds = 0;
+                updateTimerDisplays();
+            }
+        });
+    }
+
+    updateTimerDisplays();
 });
