@@ -42,7 +42,7 @@ const resourceData = [
             { name: "豐家", url: "https://docs.google.com/spreadsheets/d/15YcDLS_c7fzFNgQRNoOqZt_lIJIL56qu-SIQIpSU9BM/" },
             { name: "豐國", url: "https://docs.google.com/spreadsheets/d/167_jTCFcIycfaDneSVmLAWj0OBPFggKOTlO1VkqvffI/" },
             { name: "豐谷", url: "https://docs.google.com/spreadsheets/d/1IvCdWV168EpfBiWsVf7_omJbyoVW2_J4XxJwe55OGYM/" },
-            { name: "勁健", url: "https://docs.google.com/spreadsheets/d/1L1cDHT-tcgwtbt9rk-ih08T-cag8NWNitJbIjGZK9KI/" }            
+            { name: "勁健", url: "https://docs.google.com/spreadsheets/d/1L1cDHT-tcgwtbt9rk-ih08T-cag8NWNitJbIjGZK9KI/" }
         ]
     },
     {
@@ -61,7 +61,7 @@ const resourceData = [
         icon: "👷‍♂️",
         sheets: [
             { name: "雅霖", url: "https://docs.google.com/spreadsheets/d/1bv8t7KiAe_sLQmpGyHFcIfU_nH5SOJOo-bDQv2Mi8Uw/" },
-            { name: "豐家", url: "https://docs.google.com/spreadsheets/d/17rc7GSgInKaRYbKIit-BlQbrxVvQXoeiHjh1kQOCPDs/" }, 
+            { name: "豐家", url: "https://docs.google.com/spreadsheets/d/17rc7GSgInKaRYbKIit-BlQbrxVvQXoeiHjh1kQOCPDs/" },
             { name: "豐國", url: "https://docs.google.com/spreadsheets/d/1SYm0PLg4bdaceY8CKFtVr_oV-3EqWM7XYlEE7nsibAc/" },
             { name: "豐谷", url: "https://docs.google.com/spreadsheets/d/1PYPyOfs-Jvl2kSJQSrov-fXRtDHsQu-oNpfhfGOnWX0/" },
             { name: "勁健", url: "https://docs.google.com/spreadsheets/d/1wxE7YJuzqJ7Vxnyuqr5ZphEhk9u5q3FkGx8Zl8afqhE/" },
@@ -73,13 +73,13 @@ const resourceData = [
         icon: "🩺",
         sheets: [
             { name: "雅霖", url: "https://docs.google.com/spreadsheets/d/1YzNMWVjxXLR2zXodRcsR47-EdYcof-glj8d3Cp536Ps/" },
-            { name: "豐家", url: "https://docs.google.com/spreadsheets/d/163idwOgS2xrzvqdjIJRnKGLsYg4MZodUyel6EdrUwto/" }, 
+            { name: "豐家", url: "https://docs.google.com/spreadsheets/d/163idwOgS2xrzvqdjIJRnKGLsYg4MZodUyel6EdrUwto/" },
             { name: "豐國", url: "https://docs.google.com/spreadsheets/d/19cI2OA16HFg5ehVmYuDwgDr49SwHaXdCZHvmcbM6LuY/" },
             { name: "豐谷", url: "https://docs.google.com/spreadsheets/d/1CvBjvgTxWzdMdQpaJa0ppnX0dh1kkMzZo11tzvIyASI/" },
             { name: "勁健", url: "https://docs.google.com/spreadsheets/d/1Gc9QOdU53uCHn5SfGsaNXWHzmeVNN95KbAOoOalaqzU/" },
             { name: "豐德", url: "https://docs.google.com/spreadsheets/d/1pXDl2hx79iQprXnLfQrE_wj2Fr79NDMuutc5buE_TmM/" }
         ]
-    }    
+    }
 ];
 
 // 當網頁載入完成後，執行以下程式
@@ -96,7 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 網路 IP 鎖定清單
     const ALLOWED_IPS = [
-        "1.175.177.14"    // 新增的第二個 IP
+        "1.175.177.14",    // 新增的第二個 IP
+        "114.47.162.40"
     ];
 
     // 檢查是否已記住登入狀態
@@ -132,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     loginScreen.style.display = "none";
                     appContainer.style.display = "flex";
                     loginError.style.display = "none";
-                    
+
                     // 恢復按鈕預設狀態以便下次登出後使用
                     loginBtn.innerText = "登入";
                     loginBtn.style.opacity = "1";
@@ -182,18 +183,18 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.removeItem("hrms_logged_in");
             appContainer.style.display = "none";
             loginScreen.style.display = "flex";
-            
+
             // 清空輸入框
             if (usernameInput) usernameInput.value = "";
             if (passwordInput) passwordInput.value = "";
             if (loginError) loginError.style.display = "none";
-            
+
             // 重置分頁與畫面狀態
             openedTabs = [];
             currentActiveTabId = null;
             document.getElementById("tabs-container").innerHTML = "";
             document.querySelectorAll(".sheet-link").forEach(link => link.classList.remove("active"));
-            
+
             // 恢復只顯示歡迎畫面
             const iframeContainerEl = document.getElementById("iframe-container");
             iframeContainerEl.innerHTML = `
@@ -401,7 +402,7 @@ document.addEventListener("DOMContentLoaded", () => {
         openAllBtn.title = "開啟此資料夾內的所有報表";
         openAllBtn.addEventListener("click", (e) => {
             e.stopPropagation(); // 阻止干擾資料夾折疊事件
-            
+
             // 確保資料夾處於展開狀態
             folderEl.classList.add("open");
 
@@ -504,7 +505,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         clearInterval(pomoInterval);
                         pomoIsRunning = false;
                         pomoPlay.innerText = "▶";
-                        
+
                         if (pomoMode === "work") {
                             setTimeout(() => {
                                 alert("🍅 番茄鐘 25 分鐘完成！稍微休息一下吧！");
