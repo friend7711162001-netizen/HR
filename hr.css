@@ -1,0 +1,505 @@
+/* 基礎設定 */
+:root {
+  --bg-sidebar: #F2F5F3;     /* 莫蘭迪淺灰綠 - 側欄 */
+  --bg-main: #FAFCFB;        /* 幾乎純白但帶微綠 - 主區 */
+  --text-main: #3F4A42;      /* 莫蘭迪深墨綠 - 主文字 */
+  --text-muted: #7A8B80;     /* 柔和灰綠色 - 次要文字 */
+  --accent-color: #89A894;   /* 靜謐莫蘭迪綠 - 重點色 */
+  --hover-color: #E2EBE5;    /* 懸停灰綠色 */
+  --border-color: #CFDBD4;   /* 邊框色 */
+  --shadow-sm: 0 4px 12px rgba(137, 168, 148, 0.15); /* 柔和綠色陰影 */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Nunito', 'Microsoft JhengHei', sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-main);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* =========================================
+   左側側邊欄設計 
+   ========================================= */
+.sidebar {
+  width: 220px;
+  /* 變窄以符合文字大小 */
+  min-width: 220px;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.02);
+  z-index: 10;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 收合狀態 */
+.sidebar.collapsed {
+  margin-left: -220px;
+  /* 往左移出畫面 */
+}
+
+/* 側欄標題與收合按鈕 */
+.sidebar-header {
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-header h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.toggle-btn:hover {
+  background-color: var(--hover-color);
+  color: var(--accent-color);
+}
+
+/* 選單區塊 */
+.folder-tree {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+}
+
+/* 側面底部資訊區 */
+.sidebar-footer {
+  padding: 8px 16px 6px 16px;
+  border-top: 1px dashed var(--border-color);
+  font-size: 0.75rem;
+  color: rgba(180, 160, 150, 0.8);
+  /* 使用暖灰/柔和色系避免太突兀 */
+  text-align: center;
+  line-height: 1.4;
+}
+
+.sidebar-footer p {
+  margin: 0;
+}
+
+.folder {
+  margin-bottom: 4px;
+}
+
+.folder-title,
+.sheet-link {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  user-select: none;
+}
+
+.folder-title {
+  color: var(--text-main);
+  font-size: 1rem;
+}
+
+.folder-title:hover,
+.sheet-link:hover {
+  background-color: var(--hover-color);
+  transform: translateX(4px);
+}
+
+/* 檔案內容往內縮 */
+.sub-folder-group {
+  padding-left: 20px;
+  display: none;
+}
+
+/* =========================================
+   滑鼠全版感應觸發區
+   ========================================= */
+.hover-trigger {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 25px;
+  /* 感應的寬度，你可以調整這個數字 */
+  height: 100%;
+  z-index: 99;
+  /* 低於漢堡按鈕以免擋住，但大於表格 */
+  cursor: pointer;
+  /* background-color: rgba(255, 0, 0, 0.2); 若你想測試感應區多大，可以解除這行的註解 */
+}
+
+.folder.open>.sub-folder-group {
+  display: block;
+  animation: fadeInDown 0.3s ease forwards;
+}
+
+.sheet-link {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  font-weight: 400;
+  padding: 8px 12px;
+}
+
+.sheet-link.active {
+  background-color: var(--accent-color);
+  color: white;
+  box-shadow: var(--shadow-sm);
+  transform: translateX(4px);
+}
+
+/* =========================================
+   右側主要內容區設計
+   ========================================= */
+.main-content {
+  flex: 1;
+  position: relative;
+  background-color: var(--bg-main);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* 確保放大縮小的 iframe 不會撐出捲軸 */
+}
+
+/* =========================================
+   分頁列 (Tabs)
+   ========================================= */
+.tabs-container {
+  display: flex;
+  background-color: var(--bg-sidebar);
+  /* 跟隨側邊欄顏色更融洽 */
+  border-bottom: 1px solid var(--border-color);
+  padding: 6px 100px 0 48px;
+  /* 左邊留 48px 給漢堡按鈕的空間，右邊留 100px 給全部關閉按鈕 */
+  gap: 6px;
+  overflow-x: auto;
+  /* 允許橫向捲動 */
+  flex-shrink: 0;
+  min-height: 32px;
+  /* 高度縮小 */
+  align-items: flex-end;
+}
+
+.tabs-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.tab {
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  padding: 4px 10px;
+  /* 內距縮小 */
+  border-radius: 8px 8px 0 0;
+  /* 上面圓角 */
+  font-size: 0.85rem;
+  /* 字體縮小 */
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 150px;
+  /* 限制寬度避免太長 */
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.tab.active {
+  background-color: var(--bg-main);
+  color: var(--accent-color);
+  font-weight: bold;
+  border-bottom: 2px solid var(--bg-main);
+  margin-bottom: -1px;
+  /* 蓋過容器底線，視覺上連在一起 */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.tab-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.close-btn {
+  font-size: 0.7rem;
+  color: #999;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.close-btn:hover {
+  background-color: #ffcccc;
+  color: #cc0000;
+}
+
+/* 展開側欄的懸浮按鈕 */
+.float-btn {
+  position: absolute;
+  top: 4px;
+  /* 微調高度以適應縮小的分頁列 */
+  left: 6px;
+  z-index: 20;
+  background-color: var(--bg-sidebar);
+  border: 1px solid var(--border-color);
+  color: var(--accent-color);
+  border-radius: 8px;
+  padding: 2px 8px;
+  /* 按鈕變小 */
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  /* 字體微縮 */
+  transition: all 0.2s;
+}
+
+.float-btn:hover {
+  background-color: var(--hover-color);
+  transform: scale(1.05);
+}
+
+/* 右上角全部關閉按鈕 */
+.close-all-btn {
+  position: absolute;
+  top: 5px;
+  right: 12px;
+  z-index: 20;
+  background-color: rgba(211, 125, 125, 0.1);
+  border: 1px solid rgba(200, 100, 100, 0.2);
+  color: #D37D7D;
+  border-radius: 6px;
+  padding: 3px 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.close-all-btn:hover {
+  background-color: #D37D7D;
+  color: white;
+}
+
+/* 資料夾右側的「全部開啟」小按鈕 */
+.open-all-btn {
+  margin-left: auto;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  background-color: var(--text-muted);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.open-all-btn:hover {
+  background-color: var(--text-main);
+  transform: scale(1.05);
+}
+
+/* iframe 顯示區域 */
+.iframe-container {
+  flex: 1;
+  /* 填滿剩下的高度 */
+  position: relative;
+  overflow: hidden;
+  /* 切割多餘的 25% 內容 */
+}
+
+/* 動態生成的 sheet iframe */
+.sheet-frame {
+  /* 使用絕對定位將表格釘在主畫面上方，讓長寬完美依照銀幕展開 */
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  /* 為了搭配縮小的比例，我們必須把原始寬高撐大 (100 / 0.8 = 125%) */
+  width: 125%;
+  height: 125%;
+  /* 透過 CSS 強制將畫面縮小至 80% */
+  transform: scale(0.8);
+  transform-origin: 0 0;
+  /* 固定以左上角為基準來縮小 */
+
+  display: none;
+  border: none;
+}
+
+.welcome-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.welcome-screen h3 {
+  font-size: 1.8rem;
+  color: var(--accent-color);
+}
+
+.welcome-screen p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   登入畫面設計
+   ========================================= */
+.login-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-sidebar);
+  /* 使用側欄溫暖的背景色 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.login-box {
+  background-color: var(--bg-main);
+  /* 內容框使用純白底 */
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+  width: 320px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+}
+
+.login-box h2 {
+  color: var(--accent-color);
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+}
+
+.login-box p {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
+
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  background-color: transparent;
+  transition: all 0.2s;
+}
+
+.input-group input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(137, 168, 148, 0.15); /* 莫蘭迪綠陰影 */
+}
+
+.error-msg {
+  color: #D37D7D !important; /* 柔和的紅色 */
+  font-size: 0.85rem !important;
+  margin-bottom: 16px !important;
+  font-weight: bold;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-bottom: 8px;
+}
+
+.login-btn:hover {
+  background-color: var(--text-main);
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 8px;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 4px;
+}
+
+.logout-btn:hover {
+  background-color: var(--text-main);
+  transform: translateY(-1px);
+}

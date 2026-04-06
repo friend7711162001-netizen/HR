@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人資管理系統</title>
+
+    <!-- 網頁分頁上的可愛小 Icon (Favicon) -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='c' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFF2CA'/%3E%3Cstop offset='60%25' stop-color='%23FFD6BA'/%3E%3Cstop offset='100%25' stop-color='%23FFB3B3'/%3E%3C/linearGradient%3E%3ClinearGradient id='o' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFF0A8'/%3E%3Cstop offset='100%25' stop-color='%23FFD151'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M28 55Q20 50 20 40' fill='none' stroke='%23FFB3B3' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M72 55Q85 55 83 40' fill='none' stroke='%23FFB3B3' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M83 40Q86 36 88 40' fill='none' stroke='%23FFB3B3' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M83 40Q80 34 83 36' fill='none' stroke='%23FFB3B3' stroke-width='3' stroke-linecap='round'/%3E%3Crect x='25' y='15' width='50' height='70' rx='10' fill='url(%23c)' stroke='%234A3F35' stroke-width='2.5'/%3E%3Crect x='32' y='22' width='36' height='15' rx='4' fill='%23C9F2F0' stroke='%234A3F35' stroke-width='2'/%3E%3Cpath d='M60 26C62 24,65 25,65 27.5C65 31,60 34,60 34C60 34,55 31,55 27.5C55 25,58 24,60 26Z' fill='%23FF7474' stroke='%234A3F35' stroke-width='1.5' stroke-linejoin='round'/%3E%3Ccircle cx='40' cy='46' r='4.5' fill='%234A3F35'/%3E%3Ccircle cx='41.5' cy='44.5' r='1.5' fill='%23FFFFFF'/%3E%3Ccircle cx='60' cy='46' r='4.5' fill='%234A3F35'/%3E%3Ccircle cx='61.5' cy='44.5' r='1.5' fill='%23FFFFFF'/%3E%3Cpath d='M47 50Q50 53 53 50' fill='none' stroke='%234A3F35' stroke-width='2' stroke-linecap='round'/%3E%3Cellipse cx='33' cy='49' rx='4' ry='2' fill='%23FF7474' opacity='.4'/%3E%3Cellipse cx='67' cy='49' rx='4' ry='2' fill='%23FF7474' opacity='.4'/%3E%3Crect x='33' y='58' width='8' height='6' rx='2' fill='%23D3D3F1' stroke='%234A3F35' stroke-width='1.5'/%3E%3Crect x='46' y='58' width='8' height='6' rx='2' fill='%23D3D3F1' stroke='%234A3F35' stroke-width='1.5'/%3E%3Crect x='59' y='58' width='8' height='15' rx='2' fill='%23A8E6CF' stroke='%234A3F35' stroke-width='1.5'/%3E%3Crect x='33' y='67' width='8' height='6' rx='2' fill='%23D3D3F1' stroke='%234A3F35' stroke-width='1.5'/%3E%3Crect x='46' y='67' width='8' height='6' rx='2' fill='%23D3D3F1' stroke='%234A3F35' stroke-width='1.5'/%3E%3Cpath d='M18 15L20 20L25 22L20 24L18 29L16 24L11 22L16 20Z' fill='%23FFE169' stroke='%234A3F35' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M85 28L86 31L89 32L86 33L85 36L84 33L81 32L84 31Z' fill='%23FFE169' stroke='%234A3F35' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M60 8L61 11L64 12L61 13L60 16L59 13L56 12L59 11Z' fill='%23FFE169' stroke='%234A3F35' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cg transform='translate(18, 40) rotate(-20)'%3E%3Cellipse cx='0' cy='0' rx='6' ry='10' fill='url(%23o)' stroke='%234A3F35' stroke-width='1.5'/%3E%3Cellipse cx='-1.5' cy='0' rx='3' ry='7' fill='none' stroke='%234A3F35' stroke-width='1'/%3E%3C/g%3E%3Cg transform='translate(75, 12) rotate(25)'%3E%3Cellipse cx='0' cy='0' rx='6' ry='10' fill='url(%23o)' stroke='%234A3F35' stroke-width='1.5'/%3E%3Cellipse cx='-1.5' cy='0' rx='3' ry='7' fill='none' stroke='%234A3F35' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E">
+
+    <link rel="stylesheet" href="hr.css">
+    <!-- 引入 Google Fonts 添加現代活潑的圓潤字體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 登入畫面 -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-box">
+            <h2>🔐 人資管理系統</h2>
+            <p>請輸入帳號密碼以取得權限</p>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="帳號">
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="密碼">
+            </div>
+            <p id="login-error" class="error-msg" style="display: none;">帳號或密碼錯誤！</p>
+            <button id="login-btn" class="login-btn">登入</button>
+        </div>
+    </div>
+
+    <!-- 原本的主容器，預設先隱藏 -->
+    <div class="app-container" id="app-container" style="display: none;">
+        <!-- 左側導覽列 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 style="display: flex; align-items: center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="36" height="36"
+                        style="margin-right: 8px; flex-shrink: 0;">
+                        <defs>
+                            <linearGradient id="calcGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#FFF2CA" />
+                                <stop offset="60%" stop-color="#FFD6BA" />
+                                <stop offset="100%" stop-color="#FFB3B3" />
+                            </linearGradient>
+                            <linearGradient id="coinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFF0A8" />
+                                <stop offset="100%" stop-color="#FFD151" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Left arm -->
+                        <path d="M 28 55 Q 20 50 20 40" fill="none" stroke="#FFB3B3" stroke-width="4" stroke-linecap="round"/>
+                        <!-- Right arm waving -->
+                        <path d="M 72 55 Q 85 55 83 40" fill="none" stroke="#FFB3B3" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M 83 40 Q 86 36 88 40" fill="none" stroke="#FFB3B3" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M 83 40 Q 80 34 83 36" fill="none" stroke="#FFB3B3" stroke-width="3" stroke-linecap="round"/>
+
+                        <!-- Calculator Body -->
+                        <rect x="25" y="15" width="50" height="70" rx="10" fill="url(#calcGrad)" stroke="#4A3F35" stroke-width="2.5" />
+
+                        <!-- Screen -->
+                        <rect x="32" y="22" width="36" height="15" rx="4" fill="#C9F2F0" stroke="#4A3F35" stroke-width="2" />
+                        <!-- Heart on screen -->
+                        <path d="M 60 26 C 62 24, 65 25, 65 27.5 C 65 31, 60 34, 60 34 C 60 34, 55 31, 55 27.5 C 55 25, 58 24, 60 26 Z" fill="#FF7474" stroke="#4A3F35" stroke-width="1.5" stroke-linejoin="round"/>
+
+                        <!-- Eyes -->
+                        <circle cx="40" cy="46" r="4.5" fill="#4A3F35" />
+                        <circle cx="41.5" cy="44.5" r="1.5" fill="#FFFFFF" />
+                        
+                        <circle cx="60" cy="46" r="4.5" fill="#4A3F35" />
+                        <circle cx="61.5" cy="44.5" r="1.5" fill="#FFFFFF" />
+
+                        <!-- Smile -->
+                        <path d="M 47 50 Q 50 53 53 50" fill="none" stroke="#4A3F35" stroke-width="2" stroke-linecap="round"/>
+
+                        <!-- Blush -->
+                        <ellipse cx="33" cy="49" rx="4" ry="2" fill="#FF7474" opacity="0.4"/>
+                        <ellipse cx="67" cy="49" rx="4" ry="2" fill="#FF7474" opacity="0.4"/>
+
+                        <!-- Buttons: Row 1 -->
+                        <rect x="33" y="58" width="8" height="6" rx="2" fill="#D3D3F1" stroke="#4A3F35" stroke-width="1.5" />
+                        <rect x="46" y="58" width="8" height="6" rx="2" fill="#D3D3F1" stroke="#4A3F35" stroke-width="1.5" />
+                        
+                        <!-- Tall Green Button -->
+                        <rect x="59" y="58" width="8" height="15" rx="2" fill="#A8E6CF" stroke="#4A3F35" stroke-width="1.5" />
+
+                        <!-- Buttons: Row 2 -->
+                        <rect x="33" y="67" width="8" height="6" rx="2" fill="#D3D3F1" stroke="#4A3F35" stroke-width="1.5" />
+                        <rect x="46" y="67" width="8" height="6" rx="2" fill="#D3D3F1" stroke="#4A3F35" stroke-width="1.5" />
+
+                        <!-- Stars -->
+                        <path d="M 18 15 L 20 20 L 25 22 L 20 24 L 18 29 L 16 24 L 11 22 L 16 20 Z" fill="#FFE169" stroke="#4A3F35" stroke-width="1.5" stroke-linejoin="round"/>
+                        <path d="M 85 28 L 86 31 L 89 32 L 86 33 L 85 36 L 84 33 L 81 32 L 84 31 Z" fill="#FFE169" stroke="#4A3F35" stroke-width="1.5" stroke-linejoin="round"/>
+                        <path d="M 60 8 L 61 11 L 64 12 L 61 13 L 60 16 L 59 13 L 56 12 L 59 11 Z" fill="#FFE169" stroke="#4A3F35" stroke-width="1.5" stroke-linejoin="round"/>
+
+                        <!-- Coin Left -->
+                        <g transform="translate(18, 40) rotate(-20)">
+                            <ellipse cx="0" cy="0" rx="6" ry="10" fill="url(#coinGrad)" stroke="#4A3F35" stroke-width="1.5" />
+                            <ellipse cx="-1.5" cy="0" rx="3" ry="7" fill="none" stroke="#4A3F35" stroke-width="1"/>
+                        </g>
+                        
+                        <!-- Coin Right -->
+                        <g transform="translate(75, 12) rotate(25)">
+                            <ellipse cx="0" cy="0" rx="6" ry="10" fill="url(#coinGrad)" stroke="#4A3F35" stroke-width="1.5" />
+                            <ellipse cx="-1.5" cy="0" rx="3" ry="7" fill="none" stroke="#4A3F35" stroke-width="1"/>
+                        </g>
+                    </svg>
+                    人資管理系統
+                </h2>
+                <button id="pin-sidebar" class="toggle-btn" title="鎖定選單">🔓</button>
+            </div>
+
+            <!-- 選單清單的容器，將由 JavaScript 動態產生 -->
+            <nav class="folder-tree" id="folder-tree">
+                <!-- 預留結構，後續交給 JS 生成內容 -->
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="logout-btn">登出系統</button>
+                <p style="font-size: 0.7rem; color: #88A694; margin-top: 4px;">版本 v1.0</p>
+                <p style="font-size: 0.7rem; color: #88A694;">更新: 2026/04/07</p>
+            </div>
+        </aside>
+
+        <!-- 右側主要內容區 -->
+        <main class="main-content">
+            <!-- 展開側邊欄的懸浮按鈕 (一開始是隱藏的) -->
+            <button id="show-sidebar" class="float-btn" title="展開選單" style="display: none;">☰</button>
+            <div id="hover-trigger" class="hover-trigger" style="display: none;"></div>
+
+            <!-- 分頁標籤列 (一開始隱藏) -->
+            <div id="tabs-container" class="tabs-container" style="display: none;"></div>
+            <button id="close-all-btn" class="close-all-btn" title="關閉全部分頁" style="display: none;">✖ 關閉全部</button>
+
+            <!-- 實際渲染 Google Sheet 或歡迎畫面的區域 -->
+            <div id="iframe-container" class="iframe-container">
+                <!-- 未選取檔案時的歡迎畫面 -->
+                <div class="welcome-screen" id="welcome-screen">
+                    <h3>👋 歡迎使用！</h3>
+                    <p>人生的意義不在於目的地🦄</p>
+                    <p>而是在於你為這趟旅程賦予了什麼樣的色彩🌈</p>
+                    <p>我們並非為了等待終點而活🍄</p>
+                    <p>而是為了在無數個『當下』裡🎊</p>
+                    <p>活出讓自己感到踏實的瞬間✨</p>
+                </div>
+                <!-- 到時候 Javascript 會把許多 <iframe class="sheet-frame"> 塞進這裡 -->
+            </div>
+        </main>
+    </div>
+
+    <script src="hr.js"></script>
+</body>
+
+</html>
