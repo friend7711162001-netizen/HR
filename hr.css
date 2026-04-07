@@ -333,8 +333,7 @@ body {
 
 /* 釘選狀態的分頁標籤樣式 */
 .tab.pinned {
-  border-top: 2px solid var(--accent-color);
-  background-color: rgba(137, 168, 148, 0.05);
+  /* 維持與一般分頁一樣的底色，不額外加框 */
 }
 
 /* 展開側欄的懸浮按鈕 */
