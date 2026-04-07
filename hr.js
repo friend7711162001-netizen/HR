@@ -508,6 +508,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let pomoMode = "work"; // "work" 或是 "break"
     let pomoInterval = null;
 
+    // 用於系統校準的變數 (支援背景執行)
+    let pomoEndTime = 0; 
+    let sessionStartTime = 0;
+    let accumulatedWorkSeconds = 0; 
     let totalWorkSeconds = 0; // 累積計時器 (連動番茄鐘)
 
     function formatTime(seconds) {
@@ -534,18 +538,30 @@ document.addEventListener("DOMContentLoaded", () => {
             pomoIsRunning = !pomoIsRunning;
             if (pomoIsRunning) {
                 pomoPlay.innerText = "⏸";
+
+                // 設定系統對齊時間
+                pomoEndTime = Date.now() + (pomoTimeLeft * 1000);
+                sessionStartTime = Date.now();
+
                 pomoInterval = setInterval(() => {
-                    pomoTimeLeft--;
-                    
-                    // 只有在工作模式時，才會計入累積計時器
+                    // 使用系統時間計算「剩餘時間」 (避免背景變慢)
+                    const now = Date.now();
+                    pomoTimeLeft = Math.max(0, Math.round((pomoEndTime - now) / 1000));
+
+                    // 累積總計時：原本累積的 + (現在時間 - 本次 Session 開始時間)
                     if (pomoMode === "work") {
-                        totalWorkSeconds++;
+                        totalWorkSeconds = accumulatedWorkSeconds + Math.round((now - sessionStartTime) / 1000);
                     }
 
                     if (pomoTimeLeft <= 0) {
                         clearInterval(pomoInterval);
                         pomoIsRunning = false;
                         pomoPlay.innerText = "▶";
+
+                        // 結算本次 Session
+                        if (pomoMode === "work") {
+                            accumulatedWorkSeconds = totalWorkSeconds;
+                        }
 
                         if (pomoMode === "work") {
                             setTimeout(() => {
@@ -564,10 +580,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     }
                     updateTimerDisplays();
-                }, 1000);
+                }, 500); // 頻率調高一點點，讓顯示更細膩
             } else {
                 pomoPlay.innerText = "▶";
                 clearInterval(pomoInterval);
+                
+                // 暫停時，將本次累積的時間存入底標
+                if (pomoMode === "work") {
+                    accumulatedWorkSeconds = totalWorkSeconds;
+                }
             }
         });
     }
@@ -580,6 +601,13 @@ document.addEventListener("DOMContentLoaded", () => {
             pomoPlay.innerText = "▶";
             pomoMode = "work";
             pomoTimeLeft = 25 * 60;
+            
+            // 重置時不一定要重置總累計時間，若使用者要重置累計時間，請使用累計計時器的重置鍵
+            // 但本次 Session 的增量應該被清掉
+            if (pomoMode === "work") {
+                totalWorkSeconds = accumulatedWorkSeconds;
+            }
+            
             updateTimerDisplays();
         });
     }
@@ -604,7 +632,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (stopwatchResetBtn) {
         stopwatchResetBtn.addEventListener("click", () => {
             if (confirm("確定要將累積作帳時間歸零嗎？")) {
+                accumulatedWorkSeconds = 0;
                 totalWorkSeconds = 0;
+                if (pomoIsRunning) {
+                    sessionStartTime = Date.now(); // 歸零後重新起算 Session
+                }
                 updateTimerDisplays();
             }
         });
