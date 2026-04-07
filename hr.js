@@ -536,7 +536,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 pomoPlay.innerText = "⏸";
                 pomoInterval = setInterval(() => {
                     pomoTimeLeft--;
-                    totalWorkSeconds++; // 計時器跟著番茄鐘走
+                    
+                    // 只有在工作模式時，才會計入累積計時器
+                    if (pomoMode === "work") {
+                        totalWorkSeconds++;
+                    }
 
                     if (pomoTimeLeft <= 0) {
                         clearInterval(pomoInterval);
