@@ -1,13 +1,21 @@
 /* 基礎設定 */
 :root {
-  --bg-sidebar: #F2F5F3;     /* 莫蘭迪淺灰綠 - 側欄 */
-  --bg-main: #FAFCFB;        /* 幾乎純白但帶微綠 - 主區 */
-  --text-main: #3F4A42;      /* 莫蘭迪深墨綠 - 主文字 */
-  --text-muted: #7A8B80;     /* 柔和灰綠色 - 次要文字 */
-  --accent-color: #89A894;   /* 靜謐莫蘭迪綠 - 重點色 */
-  --hover-color: #E2EBE5;    /* 懸停灰綠色 */
-  --border-color: #CFDBD4;   /* 邊框色 */
-  --shadow-sm: 0 4px 12px rgba(137, 168, 148, 0.15); /* 柔和綠色陰影 */
+  --bg-sidebar: #F2F5F3;
+  /* 莫蘭迪淺灰綠 - 側欄 */
+  --bg-main: #FAFCFB;
+  /* 幾乎純白但帶微綠 - 主區 */
+  --text-main: #3F4A42;
+  /* 莫蘭迪深墨綠 - 主文字 */
+  --text-muted: #7A8B80;
+  /* 柔和灰綠色 - 次要文字 */
+  --accent-color: #89A894;
+  /* 靜謐莫蘭迪綠 - 重點色 */
+  --hover-color: #E2EBE5;
+  /* 懸停灰綠色 */
+  --border-color: #CFDBD4;
+  /* 邊框色 */
+  --shadow-sm: 0 4px 12px rgba(137, 168, 148, 0.15);
+  /* 柔和綠色陰影 */
 }
 
 * {
@@ -170,11 +178,9 @@ body {
   padding: 8px 12px;
 }
 
+/* 移除側點選選中狀態，讓它回復原樣 */
 .sheet-link.active {
-  background-color: var(--accent-color);
-  color: white;
-  box-shadow: var(--shadow-sm);
-  transform: translateX(4px);
+  /* 不設定任何樣式，使其與普通狀態一致 */
 }
 
 /* =========================================
@@ -224,18 +230,19 @@ body {
   font-size: 0.85rem;
   /* 字體縮小 */
   color: var(--text-muted);
-  cursor: grab;
+  cursor: default;
   display: flex;
   align-items: center;
   gap: 8px;
   max-width: 150px;
   /* 限制寬度避免太長 */
-  transition: all 0.2s, transform 0s; /* 拖拽時取消位移相關動畫避免跳動 */
+  transition: all 0.2s, transform 0s;
+  /* 拖拽時取消位移相關動畫避免跳動 */
   user-select: none;
 }
 
 .tab:active {
-  cursor: grabbing;
+  cursor: default;
 }
 
 /* 拖拽時的分身樣式 */
@@ -245,17 +252,35 @@ body {
 }
 
 .tab:hover {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 -2px 8px rgba(137, 168, 148, 0.2);
+  transform: translateY(-2px);
+  color: var(--accent-color);
 }
 
 .tab.active {
-  background-color: var(--bg-main);
-  color: var(--accent-color);
+  background-color: var(--accent-color);
+  color: white;
   font-weight: bold;
-  border-bottom: 2px solid var(--bg-main);
+  border-bottom: 2px solid var(--accent-color);
   margin-bottom: -1px;
   /* 蓋過容器底線，視覺上連在一起 */
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.02);
+  box-shadow: var(--shadow-sm);
+}
+
+/* 當分頁是深色 active 時，調整按鈕顏色以確保對比 */
+.tab.active .close-btn,
+.tab.active .pin-btn {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.tab.active .close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.tab.active .pin-btn:hover {
+  color: white;
 }
 
 .tab-title {
@@ -265,11 +290,11 @@ body {
 }
 
 .close-btn {
-  font-size: 0.7rem;
+  font-size: 0.55rem;
   color: #999;
   border-radius: 50%;
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -283,11 +308,11 @@ body {
 
 /* 釘選按鈕 */
 .pin-btn {
-  font-size: 0.8rem;
+  font-size: 0.65rem;
   color: #aaa;
   cursor: pointer;
   transition: all 0.2s;
-  padding: 2px;
+  padding: 1px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -499,11 +524,13 @@ body {
 
 .input-group input:focus {
   border-color: var(--accent-color);
-  box-shadow: 0 0 0 3px rgba(137, 168, 148, 0.15); /* 莫蘭迪綠陰影 */
+  box-shadow: 0 0 0 3px rgba(137, 168, 148, 0.15);
+  /* 莫蘭迪綠陰影 */
 }
 
 .error-msg {
-  color: #D37D7D !important; /* 柔和的紅色 */
+  color: #D37D7D !important;
+  /* 柔和的紅色 */
   font-size: 0.85rem !important;
   margin-bottom: 16px !important;
   font-weight: bold;
@@ -553,34 +580,41 @@ body {
   border: 2px dashed #C1D6CA;
   border-radius: 14px;
   background-color: #F6FAF7;
-  padding: 10px 6px; /* 縮小左右內距 */
+  padding: 10px 6px;
+  /* 縮小左右內距 */
   margin-bottom: 12px;
   display: grid;
   grid-template-columns: auto auto 1fr;
-  gap: 8px 4px; /* 縮小網格間距 */
+  gap: 8px 4px;
+  /* 縮小網格間距 */
   align-items: center;
-  box-shadow: inset 0 2px 6px rgba(136,166,148,0.08);
+  box-shadow: inset 0 2px 6px rgba(136, 166, 148, 0.08);
 }
 
 .tool-label {
-  font-size: 0.7rem; /* 縮小一點字體 */
+  font-size: 0.7rem;
+  /* 縮小一點字體 */
   font-weight: 700;
   color: #6A8072;
   white-space: nowrap;
-  letter-spacing: -0.5px; /* 讓文字緊湊些 */
+  letter-spacing: -0.5px;
+  /* 讓文字緊湊些 */
 }
 
 .tool-display {
   font-family: "Nunito", sans-serif;
-  font-size: 0.75rem; /* 字體再更小 */
+  font-size: 0.75rem;
+  /* 字體再更小 */
   font-weight: 800;
   color: #556B5D;
   background-color: #DDEAE2;
-  padding: 3px 6px; /* 縮小數字膠囊 */
+  padding: 3px 6px;
+  /* 縮小數字膠囊 */
   border-radius: 16px;
   text-align: center;
-  min-width: 55px; /* 足夠放下 00:00:00 即可 */
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.04);
+  min-width: 55px;
+  /* 足夠放下 00:00:00 即可 */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 #pomo-display {
@@ -598,7 +632,8 @@ body {
 .tool-controls {
   display: flex;
   justify-content: flex-end;
-  gap: 3px; /* 按鈕靠更近 */
+  gap: 3px;
+  /* 按鈕靠更近 */
   width: 100%;
 }
 
@@ -606,8 +641,10 @@ body {
   background-color: #FFFFFF;
   border: 1px solid #D1E0D7;
   color: #88A694;
-  font-size: 0.65rem; /* Icon 縮小 */
-  width: 22px; /* 圓形變小 */
+  font-size: 0.65rem;
+  /* Icon 縮小 */
+  width: 22px;
+  /* 圓形變小 */
   height: 22px;
   border-radius: 50%;
   display: flex;
@@ -616,7 +653,7 @@ body {
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   padding: 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .tool-btn:hover {

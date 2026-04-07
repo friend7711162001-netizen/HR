@@ -7,77 +7,97 @@ const resourceData = [
         icon: "💡",
         sheets: [
             { name: "集團名冊", url: "https://docs.google.com/spreadsheets/d/109xIMXV25Ynq4Pg1YZkVdvSDstKDHPR61uy0oCQ2D9s/edit?gid=0#gid=0" },
-            { name: "補助申請名單", url: "https://docs.google.com/spreadsheets/d/1I6HVFHvZbr3bc2tChaYEyU_uh_47JiWGb1r0tzK3GL4/" },
+            { name: "補助名單", url: "https://docs.google.com/spreadsheets/d/1I6HVFHvZbr3bc2tChaYEyU_uh_47JiWGb1r0tzK3GL4/" },
             { name: "補助薪資條", url: "https://docs.google.com/spreadsheets/d/1iWogLIkbMYLSHxOYAYQTmYDVpzJq5ztuaIG_THmzpHo/" }
+        ]
+    },
+    {
+        target: "民宿",
+        icon: "🌈",
+        sheets: [
+            { name: "零用金", url: "https://docs.google.com/spreadsheets/d/1Nx7cIEYTUj6EpjhGUXrSxzk8ZxTERBxDBWT1Sf45Zqk/" },
+            { name: "營業額", url: "https://docs.google.com/spreadsheets/d/1NwcheK33suylX73qWoq4MTYNQkOQ68i71pYGKb1ejFA/" },
+            { name: "訂金", url: "https://docs.google.com/spreadsheets/d/1SSd53tqlyhIJSKRR-Zosp6YAJnPMMBkpRPC47d5CaO0/" },
+            { name: "洗衣廠", url: "https://docs.google.com/spreadsheets/d/1nlqKSYgIDcL3EMzmRDCRtdvoIsNxo48NJPiC17rU02s/" },
+            { name: "清房表", url: "https://docs.google.com/spreadsheets/d/1Oqcy5iB5PuJ4VO8zOxY1cJEMJPzJpt7D73ene3dAs7A/" },
+            { name: "行程", url: "https://docs.google.com/spreadsheets/d/1Pi2upAXh-Oqi9PPX8xt2VEumclm32SKNxCKG19CoF08/edit?gid=755432321#gid=755432321" }
+        ]
+    },
+    {
+        target: "作帳",
+        icon: "🍭",
+        sheets: [
+            { name: "年度", url: "https://docs.google.com/spreadsheets/d/1kv33LhLlPSbDhpZUjEOWrExeZ6ZyHHBXu8VJRKWul-c/" },
+            { name: "作帳", url: "https://docs.google.com/spreadsheets/d/1tfWt3lY1IolS5rMjhGtdIWbPAi3GX8vnxIsCACeoYeo/" }
         ]
     },
     {
         target: "班表",
         icon: "📅",
         sheets: [
-            { name: "雅霖", url: "https://docs.google.com/spreadsheets/d/130QCq1GylF5IsQzBpGG6h6Wm43ryus41EWagDuSSveA/" },
-            { name: "勁健", url: "https://docs.google.com/spreadsheets/d/1ZRdkexsCKuvjZ5BkRcavlqWbBOiRFK4ixdl3ZwdePGE/" },
-            { name: "總工司", url: "https://docs.google.com/spreadsheets/d/1P090gNf9YUxiuZeJF-pPfGGzybwQ7w2RKtEJHLYtmMM/" },
-            { name: "宴會廳", url: "https://docs.google.com/spreadsheets/d/1fUm9Wa-M53TZFHfWZ9VMEfqWQXA4Fjz0Oo_YX5AoAmA/" },
-            { name: "房務", url: "https://docs.google.com/spreadsheets/d/1ryZQlsf1sTbGeghSYQohSItksV-rGCjR9zpXy_BntKg/" },
-            { name: "總", url: "https://docs.google.com/spreadsheets/d/1lJdKwwwWvGFo9Kcgo3PD7Q57CY2tMWJFSaxLacQu-Fo/" }
+            { name: "雅霖班表", url: "https://docs.google.com/spreadsheets/d/130QCq1GylF5IsQzBpGG6h6Wm43ryus41EWagDuSSveA/" },
+            { name: "勁健班表", url: "https://docs.google.com/spreadsheets/d/1ZRdkexsCKuvjZ5BkRcavlqWbBOiRFK4ixdl3ZwdePGE/" },
+            { name: "總工司班表", url: "https://docs.google.com/spreadsheets/d/1P090gNf9YUxiuZeJF-pPfGGzybwQ7w2RKtEJHLYtmMM/" },
+            { name: "宴會廳班表", url: "https://docs.google.com/spreadsheets/d/1fUm9Wa-M53TZFHfWZ9VMEfqWQXA4Fjz0Oo_YX5AoAmA/" },
+            { name: "房務班表", url: "https://docs.google.com/spreadsheets/d/1ryZQlsf1sTbGeghSYQohSItksV-rGCjR9zpXy_BntKg/" },
+            { name: "總班表", url: "https://docs.google.com/spreadsheets/d/1lJdKwwwWvGFo9Kcgo3PD7Q57CY2tMWJFSaxLacQu-Fo/" }
         ]
     },
     {
         target: "出勤表",
         icon: "📇",
         sheets: [
-            { name: "雅霖", url: "https://docs.google.com/spreadsheets/d/101NOYFz2-PAP_XVTye733hqWEUUBMd38ouDnTKd9CcE/" },
-            { name: "豐家", url: "https://docs.google.com/spreadsheets/d/1aJ346ww7LXxeZThhaVC2pvb9yKAXZOe0p-5RRupG6HA/" },
-            { name: "豐國", url: "https://docs.google.com/spreadsheets/d/1oATmVvlGAIwZzz9YRmfKOVqccvQNBeTb24Z7qA5Nlfw/" },
-            { name: "豐谷", url: "https://docs.google.com/spreadsheets/d/1DcMtHAt0SuweAePcfeh-YTfnGI6W62t4AywgP5XgKLI/" },
-            { name: "勁健", url: "https://docs.google.com/spreadsheets/d/1CAmMpWC8eC0JPq8wpDgfzLc82-ep9rhomx84b0iUzsM/" }
+            { name: "雅霖出勤", url: "https://docs.google.com/spreadsheets/d/101NOYFz2-PAP_XVTye733hqWEUUBMd38ouDnTKd9CcE/" },
+            { name: "豐家出勤", url: "https://docs.google.com/spreadsheets/d/1aJ346ww7LXxeZThhaVC2pvb9yKAXZOe0p-5RRupG6HA/" },
+            { name: "豐國出勤", url: "https://docs.google.com/spreadsheets/d/1oATmVvlGAIwZzz9YRmfKOVqccvQNBeTb24Z7qA5Nlfw/" },
+            { name: "豐谷出勤", url: "https://docs.google.com/spreadsheets/d/1DcMtHAt0SuweAePcfeh-YTfnGI6W62t4AywgP5XgKLI/" },
+            { name: "勁健出勤", url: "https://docs.google.com/spreadsheets/d/1CAmMpWC8eC0JPq8wpDgfzLc82-ep9rhomx84b0iUzsM/" }
         ]
     },
     {
         target: "薪資表",
         icon: "💰",
         sheets: [
-            { name: "雅霖", url: "https://docs.google.com/spreadsheets/d/1RDWN3J14yyYGjttFlIRLmwwdlQtK_Y4dEX3PCwAKtCY/" },
-            { name: "豐家", url: "https://docs.google.com/spreadsheets/d/15YcDLS_c7fzFNgQRNoOqZt_lIJIL56qu-SIQIpSU9BM/" },
-            { name: "豐國", url: "https://docs.google.com/spreadsheets/d/167_jTCFcIycfaDneSVmLAWj0OBPFggKOTlO1VkqvffI/" },
-            { name: "豐谷", url: "https://docs.google.com/spreadsheets/d/1IvCdWV168EpfBiWsVf7_omJbyoVW2_J4XxJwe55OGYM/" },
-            { name: "勁健", url: "https://docs.google.com/spreadsheets/d/1L1cDHT-tcgwtbt9rk-ih08T-cag8NWNitJbIjGZK9KI/" }
+            { name: "雅霖薪資", url: "https://docs.google.com/spreadsheets/d/1RDWN3J14yyYGjttFlIRLmwwdlQtK_Y4dEX3PCwAKtCY/" },
+            { name: "豐家薪資", url: "https://docs.google.com/spreadsheets/d/15YcDLS_c7fzFNgQRNoOqZt_lIJIL56qu-SIQIpSU9BM/" },
+            { name: "豐國薪資", url: "https://docs.google.com/spreadsheets/d/167_jTCFcIycfaDneSVmLAWj0OBPFggKOTlO1VkqvffI/" },
+            { name: "豐谷薪資", url: "https://docs.google.com/spreadsheets/d/1IvCdWV168EpfBiWsVf7_omJbyoVW2_J4XxJwe55OGYM/" },
+            { name: "勁健薪資", url: "https://docs.google.com/spreadsheets/d/1L1cDHT-tcgwtbt9rk-ih08T-cag8NWNitJbIjGZK9KI/" }
         ]
     },
     {
         target: "館主出勤表",
         icon: "🙋‍♀️",
         sheets: [
-            { name: "雅霖", url: "https://docs.google.com/spreadsheets/d/1Fkc431V2FTikWxmPeoaSbWNbgjVZ7gUg4-IXl9UIZAY/" },
-            { name: "豐家", url: "https://docs.google.com/spreadsheets/d/1u5xaW_570GRj-A_XUtFh6vWSywMvP8VIG_VMukDIRts/" },
-            { name: "豐國", url: "https://docs.google.com/spreadsheets/d/1PuCHvWis1SGx4YR60j18zEmgcwqDwMAF79SXvmG3URc/" },
-            { name: "豐谷", url: "https://docs.google.com/spreadsheets/d/1gMfZb6fQbWNqL0XzsnqlcT7ONvexQJ07joIX0QtnwoU/" },
-            { name: "宴會廳", url: "https://docs.google.com/spreadsheets/d/148DhN5wN2amb-oiAqrQvhahRazQkp0owhVuMqFAd6vI/" }
+            { name: "雅霖館主", url: "https://docs.google.com/spreadsheets/d/1Fkc431V2FTikWxmPeoaSbWNbgjVZ7gUg4-IXl9UIZAY/" },
+            { name: "豐家館主", url: "https://docs.google.com/spreadsheets/d/1u5xaW_570GRj-A_XUtFh6vWSywMvP8VIG_VMukDIRts/" },
+            { name: "豐國館主", url: "https://docs.google.com/spreadsheets/d/1PuCHvWis1SGx4YR60j18zEmgcwqDwMAF79SXvmG3URc/" },
+            { name: "豐谷館主", url: "https://docs.google.com/spreadsheets/d/1gMfZb6fQbWNqL0XzsnqlcT7ONvexQJ07joIX0QtnwoU/" },
+            { name: "宴會廳館主", url: "https://docs.google.com/spreadsheets/d/148DhN5wN2amb-oiAqrQvhahRazQkp0owhVuMqFAd6vI/" }
         ]
     },
     {
         target: "勞保",
         icon: "👷‍♂️",
         sheets: [
-            { name: "雅霖", url: "https://docs.google.com/spreadsheets/d/1bv8t7KiAe_sLQmpGyHFcIfU_nH5SOJOo-bDQv2Mi8Uw/" },
-            { name: "豐家", url: "https://docs.google.com/spreadsheets/d/17rc7GSgInKaRYbKIit-BlQbrxVvQXoeiHjh1kQOCPDs/" },
-            { name: "豐國", url: "https://docs.google.com/spreadsheets/d/1SYm0PLg4bdaceY8CKFtVr_oV-3EqWM7XYlEE7nsibAc/" },
-            { name: "豐谷", url: "https://docs.google.com/spreadsheets/d/1PYPyOfs-Jvl2kSJQSrov-fXRtDHsQu-oNpfhfGOnWX0/" },
-            { name: "勁健", url: "https://docs.google.com/spreadsheets/d/1wxE7YJuzqJ7Vxnyuqr5ZphEhk9u5q3FkGx8Zl8afqhE/" },
-            { name: "豐德", url: "https://docs.google.com/spreadsheets/d/17uRse_v99o3EU5ZBDYmDqH2rfHaGHH5YfiQBTc0OIEA/" }
+            { name: "雅霖勞", url: "https://docs.google.com/spreadsheets/d/1bv8t7KiAe_sLQmpGyHFcIfU_nH5SOJOo-bDQv2Mi8Uw/" },
+            { name: "豐家勞", url: "https://docs.google.com/spreadsheets/d/17rc7GSgInKaRYbKIit-BlQbrxVvQXoeiHjh1kQOCPDs/" },
+            { name: "豐國勞", url: "https://docs.google.com/spreadsheets/d/1SYm0PLg4bdaceY8CKFtVr_oV-3EqWM7XYlEE7nsibAc/" },
+            { name: "豐谷勞", url: "https://docs.google.com/spreadsheets/d/1PYPyOfs-Jvl2kSJQSrov-fXRtDHsQu-oNpfhfGOnWX0/" },
+            { name: "勁健勞", url: "https://docs.google.com/spreadsheets/d/1wxE7YJuzqJ7Vxnyuqr5ZphEhk9u5q3FkGx8Zl8afqhE/" },
+            { name: "豐德勞", url: "https://docs.google.com/spreadsheets/d/17uRse_v99o3EU5ZBDYmDqH2rfHaGHH5YfiQBTc0OIEA/" }
         ]
     },
     {
         target: "健保",
         icon: "🩺",
         sheets: [
-            { name: "雅霖", url: "https://docs.google.com/spreadsheets/d/1YzNMWVjxXLR2zXodRcsR47-EdYcof-glj8d3Cp536Ps/" },
-            { name: "豐家", url: "https://docs.google.com/spreadsheets/d/163idwOgS2xrzvqdjIJRnKGLsYg4MZodUyel6EdrUwto/" },
-            { name: "豐國", url: "https://docs.google.com/spreadsheets/d/19cI2OA16HFg5ehVmYuDwgDr49SwHaXdCZHvmcbM6LuY/" },
-            { name: "豐谷", url: "https://docs.google.com/spreadsheets/d/1CvBjvgTxWzdMdQpaJa0ppnX0dh1kkMzZo11tzvIyASI/" },
-            { name: "勁健", url: "https://docs.google.com/spreadsheets/d/1Gc9QOdU53uCHn5SfGsaNXWHzmeVNN95KbAOoOalaqzU/" },
-            { name: "豐德", url: "https://docs.google.com/spreadsheets/d/1pXDl2hx79iQprXnLfQrE_wj2Fr79NDMuutc5buE_TmM/" }
+            { name: "雅霖健", url: "https://docs.google.com/spreadsheets/d/1YzNMWVjxXLR2zXodRcsR47-EdYcof-glj8d3Cp536Ps/" },
+            { name: "豐家健", url: "https://docs.google.com/spreadsheets/d/163idwOgS2xrzvqdjIJRnKGLsYg4MZodUyel6EdrUwto/" },
+            { name: "豐國健", url: "https://docs.google.com/spreadsheets/d/19cI2OA16HFg5ehVmYuDwgDr49SwHaXdCZHvmcbM6LuY/" },
+            { name: "豐谷健", url: "https://docs.google.com/spreadsheets/d/1CvBjvgTxWzdMdQpaJa0ppnX0dh1kkMzZo11tzvIyASI/" },
+            { name: "勁健健", url: "https://docs.google.com/spreadsheets/d/1Gc9QOdU53uCHn5SfGsaNXWHzmeVNN95KbAOoOalaqzU/" },
+            { name: "豐德健", url: "https://docs.google.com/spreadsheets/d/1pXDl2hx79iQprXnLfQrE_wj2Fr79NDMuutc5buE_TmM/" }
         ]
     }
 ];
@@ -323,8 +343,8 @@ document.addEventListener("DOMContentLoaded", () => {
         closeBtn.innerHTML = "✖";
         closeBtn.title = "關閉分頁";
 
-        tabEl.appendChild(titleEl);
         tabEl.appendChild(pinBtn);
+        tabEl.appendChild(titleEl);
         tabEl.appendChild(closeBtn);
 
         // 2. 建立 iframe 渲染畫面
@@ -351,7 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 綁定事件
         tabEl.addEventListener("click", () => activateTab(tabId));
-        
+
         pinBtn.addEventListener("click", (e) => {
             e.stopPropagation();
             tabObj.isPinned = !tabObj.isPinned;
@@ -462,7 +482,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const sheetLinkEl = document.createElement("div");
             sheetLinkEl.className = "sheet-link";
             const defaultText = sheet.url ? sheet.name : `${sheet.name} (尚未加網址)`;
-            sheetLinkEl.innerHTML = `📄 ${defaultText}`;
+            sheetLinkEl.innerHTML = `🍄 ${defaultText}`;
 
             // 點擊網址事件
             sheetLinkEl.addEventListener("click", (e) => {
@@ -509,9 +529,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let pomoInterval = null;
 
     // 用於系統校準的變數 (支援背景執行)
-    let pomoEndTime = 0; 
+    let pomoEndTime = 0;
     let sessionStartTime = 0;
-    let accumulatedWorkSeconds = 0; 
+    let accumulatedWorkSeconds = 0;
     let totalWorkSeconds = 0; // 累積計時器 (連動番茄鐘)
 
     function formatTime(seconds) {
@@ -565,6 +585,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         if (pomoMode === "work") {
                             setTimeout(() => {
+                                const audio = document.getElementById("pomo-alert-sound");
+                                if (audio) audio.play().catch(e => console.log("Audio play failed:", e));
                                 alert("🍅 番茄鐘 25 分鐘完成！稍微休息一下吧！");
                                 pomoMode = "break";
                                 pomoTimeLeft = 5 * 60;
@@ -572,6 +594,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             }, 50);
                         } else {
                             setTimeout(() => {
+                                const audio = document.getElementById("pomo-alert-sound");
+                                if (audio) audio.play().catch(e => console.log("Audio play failed:", e));
                                 alert("☕ 休息結束！準備開始新的工作！");
                                 pomoMode = "work";
                                 pomoTimeLeft = 25 * 60;
@@ -584,7 +608,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 pomoPlay.innerText = "▶";
                 clearInterval(pomoInterval);
-                
+
                 // 暫停時，將本次累積的時間存入底標
                 if (pomoMode === "work") {
                     accumulatedWorkSeconds = totalWorkSeconds;
@@ -601,13 +625,13 @@ document.addEventListener("DOMContentLoaded", () => {
             pomoPlay.innerText = "▶";
             pomoMode = "work";
             pomoTimeLeft = 25 * 60;
-            
+
             // 重置時不一定要重置總累計時間，若使用者要重置累計時間，請使用累計計時器的重置鍵
             // 但本次 Session 的增量應該被清掉
             if (pomoMode === "work") {
                 totalWorkSeconds = accumulatedWorkSeconds;
             }
-            
+
             updateTimerDisplays();
         });
     }
