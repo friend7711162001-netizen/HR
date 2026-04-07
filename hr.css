@@ -179,9 +179,6 @@ body {
 }
 
 /* 移除側點選選中狀態，讓它回復原樣 */
-.sheet-link.active {
-  /* 不設定任何樣式，使其與普通狀態一致 */
-}
 
 /* =========================================
    右側主要內容區設計
@@ -260,12 +257,21 @@ body {
 
 .tab.active {
   background-color: var(--accent-color);
+  border: 1px solid var(--accent-color); /* 統一成綠色邊框 */
   color: white;
   font-weight: bold;
   border-bottom: 2px solid var(--accent-color);
   margin-bottom: -1px;
   /* 蓋過容器底線，視覺上連在一起 */
   box-shadow: var(--shadow-sm);
+}
+
+/* 選中狀態下保持深色，滑鼠移入時稍微加深 */
+.tab.active:hover {
+  background-color: var(--text-main);
+  border-color: var(--text-main);
+  color: white;
+  transform: translateY(-2px); /* 保持上浮動感 */
 }
 
 /* 當分頁是深色 active 時，調整按鈕顏色以確保對比 */
@@ -331,10 +337,7 @@ body {
   opacity: 1;
 }
 
-/* 釘選狀態的分頁標籤樣式 */
-.tab.pinned {
-  /* 維持與一般分頁一樣的底色，不額外加框 */
-}
+/* 釘選狀態的分頁標籤樣式 (目前與普通一致) */
 
 /* 展開側欄的懸浮按鈕 */
 .float-btn {
