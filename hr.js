@@ -217,8 +217,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // 一鍵關閉事件綁定
     if (closeAllBtn) {
         closeAllBtn.addEventListener("click", () => {
-            // 從後面往前關閉陣列，避免索引出錯，或使用迴圈複製的陣列
-            [...openedTabs].forEach(tab => closeTab(tab.id));
+            // 只關閉未釘選的分頁
+            [...openedTabs].filter(tab => !tab.isPinned).forEach(tab => closeTab(tab.id));
         });
     }
 
@@ -276,9 +276,13 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // 檢查是否達到分頁上限，若達到則自動關閉最前面 (最舊) 的分頁
+        // 檢查是否達到分頁上限，若達到則自動關閉最前面 (最舊) 的非釘選分頁
         if (openedTabs.length >= MAX_TABS) {
-            closeTab(openedTabs[0].id);
+            const firstUnpinned = openedTabs.find(t => !t.isPinned);
+            if (firstUnpinned) {
+                closeTab(firstUnpinned.id);
+            }
+            // 若全部都釘選，則依需求不主動關閉，維持釘選分頁的續存。
         }
 
         // 沒開過，建立全新的分頁 (加入隨機字串避免瞬間開啟多個分頁時 ID 衝突)
@@ -293,12 +297,18 @@ document.addEventListener("DOMContentLoaded", () => {
         titleEl.innerText = name;
         titleEl.title = name;
 
+        const pinBtn = document.createElement("span");
+        pinBtn.className = "pin-btn";
+        pinBtn.innerHTML = "📍";
+        pinBtn.title = "釘選分頁 (不會被『關閉全部』關閉)";
+
         const closeBtn = document.createElement("span");
         closeBtn.className = "close-btn";
         closeBtn.innerHTML = "✖";
         closeBtn.title = "關閉分頁";
 
         tabEl.appendChild(titleEl);
+        tabEl.appendChild(pinBtn);
         tabEl.appendChild(closeBtn);
 
         // 2. 建立 iframe 渲染畫面
@@ -314,15 +324,26 @@ document.addEventListener("DOMContentLoaded", () => {
         iframeContainer.appendChild(iframeEl);
 
         // 紀錄到狀態陣列
-        openedTabs.push({
+        const tabObj = {
             id: tabId,
             url: url,
             tabEl: tabEl,
-            iframeEl: iframeEl
-        });
+            iframeEl: iframeEl,
+            isPinned: false
+        };
+        openedTabs.push(tabObj);
 
         // 綁定事件
         tabEl.addEventListener("click", () => activateTab(tabId));
+        
+        pinBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            tabObj.isPinned = !tabObj.isPinned;
+            tabEl.classList.toggle("pinned", tabObj.isPinned);
+            // 點擊後切換圖示狀態
+            pinBtn.innerHTML = tabObj.isPinned ? "📌" : "📍";
+        });
+
         closeBtn.addEventListener("click", (e) => {
             e.stopPropagation(); // 阻止點擊事件往上傳遞給 tabEl
             closeTab(tabId);

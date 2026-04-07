@@ -270,6 +270,37 @@ body {
   color: #cc0000;
 }
 
+/* 釘選按鈕 */
+.pin-btn {
+  font-size: 0.8rem;
+  color: #aaa;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  opacity: 0.6;
+}
+
+.pin-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+.tab.pinned .pin-btn {
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+/* 釘選狀態的分頁標籤樣式 */
+.tab.pinned {
+  border-top: 2px solid var(--accent-color);
+  background-color: rgba(137, 168, 148, 0.05);
+}
+
 /* 展開側欄的懸浮按鈕 */
 .float-btn {
   position: absolute;
