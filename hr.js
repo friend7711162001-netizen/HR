@@ -226,6 +226,22 @@ document.addEventListener("DOMContentLoaded", () => {
     let openedTabs = [];
     let currentActiveTabId = null;
 
+    // ======== 初始化拖拽排序功能 (SortableJS) ========
+    if (typeof Sortable !== 'undefined' && tabsContainer) {
+        new Sortable(tabsContainer, {
+            animation: 150,
+            ghostClass: 'tab-ghost', // 拖拽時產生的影子樣式
+            onEnd: function (evt) {
+                // 當拖拽結束後，同步更新 openedTabs 陣列的順序
+                // 確保後續「自動關閉最舊標籤」的順序正確
+                if (evt.oldIndex !== evt.newIndex) {
+                    const movedTab = openedTabs.splice(evt.oldIndex, 1)[0];
+                    openedTabs.splice(evt.newIndex, 0, movedTab);
+                }
+            }
+        });
+    }
+
     function activateTab(tabId) {
         currentActiveTabId = tabId;
         openedTabs.forEach(tab => {

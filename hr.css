@@ -224,13 +224,24 @@ body {
   font-size: 0.85rem;
   /* 字體縮小 */
   color: var(--text-muted);
-  cursor: pointer;
+  cursor: grab;
   display: flex;
   align-items: center;
   gap: 8px;
   max-width: 150px;
   /* 限制寬度避免太長 */
-  transition: all 0.2s;
+  transition: all 0.2s, transform 0s; /* 拖拽時取消位移相關動畫避免跳動 */
+  user-select: none;
+}
+
+.tab:active {
+  cursor: grabbing;
+}
+
+/* 拖拽時的分身樣式 */
+.tab-ghost {
+  opacity: 0.3 !important;
+  background-color: var(--accent-color) !important;
 }
 
 .tab:hover {
