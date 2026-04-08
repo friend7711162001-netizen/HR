@@ -235,6 +235,41 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeAllBtn = document.getElementById("close-all-btn"); // 一鍵關閉按鈕
     const refreshAllBtn = document.getElementById("refresh-all-btn"); // 全部重整按鈕
 
+    // ======== 智慧型自動重新整理 (方案 3) ========
+    let lastGlobalUpdateTime = Date.now();
+    const SMART_REFRESH_THRESHOLD = 5 * 60 * 1000; // 門檻設定為 5 分鐘
+
+    function trySmartRefresh() {
+        if (openedTabs.length === 0) return; // 沒有分頁時不處理
+
+        const now = Date.now();
+        if (now - lastGlobalUpdateTime > SMART_REFRESH_THRESHOLD) {
+            console.log("偵測到閒置超過 5 分鐘，正在執行智慧重整...");
+            openedTabs.forEach(tab => {
+                tab.iframeEl.src = tab.iframeEl.src;
+            });
+            lastGlobalUpdateTime = now; // 更新最後更新時間
+
+            // 顯示一個提示讓使用者知道正在自動更新
+            if (refreshAllBtn) {
+                const originalText = refreshAllBtn.innerText;
+                refreshAllBtn.innerText = "✨ 自動重整中...";
+                setTimeout(() => { 
+                    if (refreshAllBtn.innerText === "✨ 自動重整中...") {
+                        refreshAllBtn.innerText = originalText; 
+                    }
+                }, 2000);
+            }
+        }
+    }
+
+    // 監聽網頁切換回來 (回到焦點)
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === 'visible') {
+            trySmartRefresh();
+        }
+    });
+
     // 一鍵關閉事件綁定
     if (closeAllBtn) {
         closeAllBtn.addEventListener("click", () => {
@@ -250,6 +285,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 // 透過重新設定 src 來強制重新整理 iframe
                 tab.iframeEl.src = tab.iframeEl.src;
             });
+            lastGlobalUpdateTime = Date.now(); // 手動重整後也更新時間戳記，重新起算 5 分鐘
+
             // 點擊後的小提示
             const originalText = refreshAllBtn.innerText;
             refreshAllBtn.innerText = "⏳ 重整中...";
