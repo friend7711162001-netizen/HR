@@ -233,12 +233,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const tabsContainer = document.getElementById("tabs-container");
     const welcomeScreen = document.getElementById("welcome-screen");
     const closeAllBtn = document.getElementById("close-all-btn"); // 一鍵關閉按鈕
+    const refreshAllBtn = document.getElementById("refresh-all-btn"); // 全部重整按鈕
 
     // 一鍵關閉事件綁定
     if (closeAllBtn) {
         closeAllBtn.addEventListener("click", () => {
             // 只關閉未釘選的分頁
             [...openedTabs].filter(tab => !tab.isPinned).forEach(tab => closeTab(tab.id));
+        });
+    }
+
+    // 全部重整事件綁定
+    if (refreshAllBtn) {
+        refreshAllBtn.addEventListener("click", () => {
+            openedTabs.forEach(tab => {
+                // 透過重新設定 src 來強制重新整理 iframe
+                tab.iframeEl.src = tab.iframeEl.src;
+            });
+            // 點擊後的小提示
+            const originalText = refreshAllBtn.innerText;
+            refreshAllBtn.innerText = "⏳ 重整中...";
+            setTimeout(() => { refreshAllBtn.innerText = originalText; }, 1000);
         });
     }
 
@@ -291,6 +306,7 @@ document.addEventListener("DOMContentLoaded", () => {
             currentActiveTabId = null;
             tabsContainer.style.display = "none";
             if (closeAllBtn) closeAllBtn.style.display = "none";
+            if (refreshAllBtn) refreshAllBtn.style.display = "none";
             welcomeScreen.style.display = "flex"; // 恢復歡迎畫面
         } else if (currentActiveTabId === tabId) {
             // 若關閉的是目前正在顯示的分頁，自動切換到最後一個分頁
@@ -303,6 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function openTab(name, url) {
         tabsContainer.style.display = "flex"; // 確保分頁列有顯示
         if (closeAllBtn) closeAllBtn.style.display = "block"; // 顯示關閉全部按鈕
+        if (refreshAllBtn) refreshAllBtn.style.display = "block"; // 顯示全部重整按鈕
         welcomeScreen.style.display = "none"; // 隱藏歡迎畫面
 
         // 檢查是否已經開過 (透過 URL 判斷)

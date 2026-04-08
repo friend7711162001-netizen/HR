@@ -389,6 +389,28 @@ body {
   color: white;
 }
 
+/* 右上角全部重整按鈕 */
+.refresh-all-btn {
+  position: absolute;
+  top: 5px;
+  right: 100px;
+  z-index: 20;
+  background-color: rgba(137, 168, 148, 0.1);
+  border: 1px solid rgba(137, 168, 148, 0.3);
+  color: var(--accent-color);
+  border-radius: 6px;
+  padding: 3px 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.refresh-all-btn:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+
 /* 資料夾右側的「全部開啟」小按鈕 */
 .open-all-btn {
   margin-left: auto;
