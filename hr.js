@@ -114,11 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const passwordInput = document.getElementById("password");
     const loginError = document.getElementById("login-error");
 
-    // 網路 IP 鎖定清單
-    const ALLOWED_IPS = [
-        "1.175.177.14",    // 新增的第二個 IP
-        "114.47.162.40"
-    ];
+
 
     // 檢查是否已記住登入狀態
     if (localStorage.getItem("hrms_logged_in") === "true") {
@@ -126,59 +122,21 @@ document.addEventListener("DOMContentLoaded", () => {
         appContainer.style.display = "flex";
     }
 
-    // 驗證帳號密碼與 IP 的非同步函式
-    const checkLogin = async () => {
-        // 1. 先驗證帳號密碼
+    // 驗證帳號密碼的函式
+    const checkLogin = () => {
+        // 驗證帳號密碼
         if (usernameInput.value === "yu" && passwordInput.value === "496527") {
-
-            // 2. 帳密正確，準備檢查網路 IP
-            loginBtn.innerText = "🌐 網路環境確認中...";
-            loginBtn.style.opacity = "0.7";
-            loginBtn.style.cursor = "not-allowed";
-            loginBtn.disabled = true;
+            // 登入成功！
+            localStorage.setItem("hrms_logged_in", "true"); // 記住登入狀態
+            loginScreen.style.display = "none";
+            appContainer.style.display = "flex";
             loginError.style.display = "none";
 
-            try {
-                // 向外部服務請求目前的公開 IP
-                const response = await fetch('https://api.ipify.org?format=json');
-                if (!response.ok) throw new Error("網路請求失敗");
-
-                const data = await response.json();
-                const currentIP = data.ip;
-
-                // 確認目前的 IP 是否在允許清單中
-                if (ALLOWED_IPS.includes(currentIP)) {
-                    // IP 符合，登入成功！
-                    localStorage.setItem("hrms_logged_in", "true"); // 記住登入狀態
-                    loginScreen.style.display = "none";
-                    appContainer.style.display = "flex";
-                    loginError.style.display = "none";
-
-                    // 恢復按鈕預設狀態以便下次登出後使用
-                    loginBtn.innerText = "登入";
-                    loginBtn.style.opacity = "1";
-                    loginBtn.style.cursor = "pointer";
-                    loginBtn.disabled = false;
-                } else {
-                    // IP 不符合
-                    loginError.innerHTML = `登入失敗：請連接公司專屬網路！<br><span style="font-size: 0.85rem; color: #888;">(您目前的網路 IP: ${currentIP})</span>`;
-                    loginError.style.display = "block";
-
-                    loginBtn.innerText = "重新登入";
-                    loginBtn.style.opacity = "1";
-                    loginBtn.style.cursor = "pointer";
-                    loginBtn.disabled = false;
-                }
-            } catch (error) {
-                // 如果使用者沒連上網，或者 api 壞掉
-                loginError.innerText = "無法取得您的網路 IP 資訊，請確認網路連線是否正常！";
-                loginError.style.display = "block";
-
-                loginBtn.innerText = "重新登入";
-                loginBtn.style.opacity = "1";
-                loginBtn.style.cursor = "pointer";
-                loginBtn.disabled = false;
-            }
+            // 恢復按鈕預設狀態以便下次登出後使用
+            loginBtn.innerText = "登入";
+            loginBtn.style.opacity = "1";
+            loginBtn.style.cursor = "pointer";
+            loginBtn.disabled = false;
         } else {
             loginError.innerText = "帳號或密碼錯誤！";
             loginError.style.display = "block";
